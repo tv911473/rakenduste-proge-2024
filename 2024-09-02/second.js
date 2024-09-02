@@ -51,3 +51,5 @@ const threeParameters = newArray.map((element, index, array) => {
 })
 
 console.log({threeParameters});
+
+// test for issue
