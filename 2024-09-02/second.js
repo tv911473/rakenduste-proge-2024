@@ -35,3 +35,19 @@ console.log(addNumbersNested(3)(4));
 
 // eelmine func -> arrow func
 const addNumbersNestedArrowFn = (num1) => (num2) => num1 + num2
+
+// liita igale elemendile juurde +5
+const newArray = [1, 2, 3, 4, 5];
+
+const addedArray = newArray.map((element) => element +5)
+
+console.log(addedArray);
+
+// 3 parameetrit, mida saab map
+const threeParameters = newArray.map((element, index, array) => {
+    console.log(element, index, array)
+
+    return element + 5;
+})
+
+console.log({threeParameters});
