@@ -16,11 +16,8 @@ const Counter = () => {
         { label: "+5", value: 5 },
         { label: "-1", value: -1 },
         { label: "-5", value: -5 },
-      ].map((element, id) => (
-        <button
-          key={id} // nupu id map funktsioonis
-          onClick={() => modifyCounter(element.value)}
-        >
+      ].map(element => (
+        <button onClick={() => modifyCounter(element.value)}>
           sync {element.label}
         </button>
       ))}
