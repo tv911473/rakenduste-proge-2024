@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Typography } from "@mui/material";
+import { Box, Container, List, ListItem, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import SubmitTodo from "./SubmitTodo";
 
@@ -32,7 +32,7 @@ const Todos = () => {
   };
 
   return (
-    <Box>
+    <Container sx={{ p: 3 }}>
       <Typography variant="h3" sx={style}>
         TODOs
       </Typography>
@@ -40,14 +40,22 @@ const Todos = () => {
         <List>
           {todos.map((todo) => (
             <ListItem key={todo.id}>
-              Title: {todo.title}, Priority: {todo.priority}
+              <Box
+                sx={{
+                  border: "1px solid grey",
+                  borderRadius: "4px",
+                  padding: "8px",
+                  alignItems: "center",
+                }}
+              >
+                Title: {todo.title}, Priority: {todo.priority}
+              </Box>
             </ListItem>
           ))}
         </List>
       </Box>
-
       <SubmitTodo fetchTodos={fetchTodos} />
-    </Box>
+    </Container>
   );
 };
 

@@ -1,4 +1,11 @@
-import { Box, List, ListItem, Typography, Button } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  Typography,
+  Button,
+  Container,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import SubmitCat from "./SubmitCat";
 import UpdateCat from "./UpdateCat";
@@ -35,7 +42,7 @@ const Cats = () => {
   };
 
   return (
-    <Box>
+    <Container sx={{ p: 3 }}>
       <Typography variant="h3" sx={style}>
         Cats
       </Typography>
@@ -52,8 +59,24 @@ const Cats = () => {
                 />
               ) : (
                 <>
-                  Name: {cat.name}
-                  <Button onClick={() => setUpdateCat(cat.id)}>Edit</Button>
+                  <Box
+                    sx={{
+                      border: "1px solid grey",
+                      borderRadius: "4px",
+                      padding: "8px",
+                      marginRight: "16px",
+                      alignItems: "center",
+                    }}
+                  >
+                    Name: {cat.name}
+                  </Box>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setUpdateCat(cat.id)}
+                    sx={{ marginRight: 1 }}
+                  >
+                    Edit
+                  </Button>
                   <DeleteCat id={cat.id} fetchCats={fetchCats} />
                 </>
               )}
@@ -61,9 +84,8 @@ const Cats = () => {
           ))}
         </List>
       </Box>
-
       <SubmitCat fetchCats={fetchCats} />
-    </Box>
+    </Container>
   );
 };
 

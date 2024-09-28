@@ -28,7 +28,11 @@ const DeleteCat = ({ id, fetchCats }: DeleteCatProps) => {
     }
   };
 
-  return <Button onClick={deleteCat}>Delete</Button>;
+  return (
+    <Button variant="contained" onClick={deleteCat}>
+      Delete
+    </Button>
+  );
 };
 
 export default DeleteCat;

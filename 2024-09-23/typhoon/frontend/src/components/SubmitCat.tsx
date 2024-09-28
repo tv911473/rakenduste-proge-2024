@@ -46,7 +46,9 @@ const SubmitCat = ({ fetchCats }: SubmitCatProps) => {
             label="Cat's name"
             onChange={(event) => setName(event.target.value)}
           />
-          <Button type="submit">Add</Button>
+          <Button variant="outlined" type="submit">
+            Add
+          </Button>
         </Stack>
       </form>
     </Box>
