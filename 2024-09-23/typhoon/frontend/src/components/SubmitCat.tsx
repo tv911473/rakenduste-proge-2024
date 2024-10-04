@@ -29,11 +29,11 @@ const SubmitCat = ({ fetchCats }: SubmitCatProps) => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    submitCat();
-    setTimeout(fetchCats, 100);
+    await submitCat(); // ootab submiti ara enne kui toimub fetchCats()
+    fetchCats();
   };
 
   return (

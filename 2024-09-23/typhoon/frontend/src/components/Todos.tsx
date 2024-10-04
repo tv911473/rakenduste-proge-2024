@@ -1,4 +1,12 @@
-import { Box, Container, List, ListItem, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  createTheme,
+  List,
+  ListItem,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import SubmitTodo from "./SubmitTodo";
 
@@ -10,6 +18,17 @@ type Todo = {
   updatedAt: number | null;
   deleted: boolean;
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#3f51b5",
+    },
+  },
+  components: {
+    MuiButtonBase: {},
+  },
+});
 
 const Todos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -32,30 +51,32 @@ const Todos = () => {
   };
 
   return (
-    <Container sx={{ p: 3 }}>
-      <Typography variant="h3" sx={style}>
-        TODOs
-      </Typography>
-      <Box sx={style}>
-        <List>
-          {todos.map((todo) => (
-            <ListItem key={todo.id}>
-              <Box
-                sx={{
-                  border: "1px solid grey",
-                  borderRadius: "4px",
-                  padding: "8px",
-                  alignItems: "center",
-                }}
-              >
-                Title: {todo.title}, Priority: {todo.priority}
-              </Box>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-      <SubmitTodo fetchTodos={fetchTodos} />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container sx={{ p: 3 }}>
+        <Typography variant="h3" sx={style}>
+          TODOs
+        </Typography>
+        <Box sx={style}>
+          <List>
+            {todos.map((todo) => (
+              <ListItem key={todo.id}>
+                <Box
+                  sx={{
+                    border: "1px solid grey",
+                    borderRadius: "4px",
+                    padding: "8px",
+                    alignItems: "center",
+                  }}
+                >
+                  Title: {todo.title}, Priority: {todo.priority}
+                </Box>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+        <SubmitTodo fetchTodos={fetchTodos} />
+      </Container>
+    </ThemeProvider>
   );
 };
 
