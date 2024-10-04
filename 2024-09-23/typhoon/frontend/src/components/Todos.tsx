@@ -26,7 +26,11 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiButtonBase: {},
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
   },
 });
 
