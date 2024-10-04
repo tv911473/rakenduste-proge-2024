@@ -20,10 +20,12 @@ const SubmitTodo = ({ fetchTodos }: SubmitTodoProps) => {
         body: JSON.stringify({ title: title, priority: priority }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         console.log("Success", response);
       } else {
-        console.warn("No success");
+        console.warn("No success", data.errors);
       }
     } catch (error) {
       console.warn(error);

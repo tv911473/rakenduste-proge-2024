@@ -7,37 +7,38 @@ const todosRoutes = require("./routes/todos.routes");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 
-const secret = "tlu@secret_key";
+const SECRET = "tlu@secret_key";
 
 app.use(cors());
 app.use(express.json());
 
 app.get("/jwt", (req, res) => {
-  const title = req.body.title;
+  const { name } = req.body;
 
-  if (!title) {
-    return res.status(400).send({ type: "Error", message: "Title required" });
+  if (!name) {
+    return res.status(400).send({ type: "Error", message: "Name required" });
   }
 
-  const token = jwt.sign({ title }, secret, { expiresIn: "1d" });
+  const token = jwt.sign({ name }, SECRET, { expiresIn: "1d" });
 
   console.log(token);
   res.send({ token });
 });
+
 app.post("/verify", (req, res) => {
-  const token = req.body.token;
+  const { token } = req.body;
 
   if (!token) {
     return res.status(400).send({ type: "Error", message: "Token required" });
   }
 
-  jwt.verify(token, secret, (err, decoded) => {
+  jwt.verify(token, SECRET, (err, decoded) => {
     if (err) {
       return res
         .status(400)
         .send({ type: "Error", message: "Token is invalid or expired" });
     }
-    console.log(`Title: ${decoded.title}`);
+    console.log(`Name: ${decoded.name}`);
     res.send({ message: "Valid token", decoded });
   });
 });

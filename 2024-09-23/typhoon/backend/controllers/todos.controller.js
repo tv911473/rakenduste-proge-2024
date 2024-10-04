@@ -1,3 +1,5 @@
+const crypto = require("crypto");
+const { validationResult } = require("express-validator");
 const todos = [
   {
     id: "1b2e0d54-1a21-4f04-8633-638a02dcbf96",
@@ -18,14 +20,13 @@ const todos = [
 ];
 
 exports.create = (req, res) => {
-  const { title, priority } = req.body;
-
-  if (!title || title === "" || priority == null) {
-    return res
-      .status(400)
-      .send({ type: "Error", message: "Missing title or priority" });
+  const result = validationResult(req);
+  if (!result.isEmpty()) {
+    return res.status(400).json({ errors: result.array() });
   }
+  console.log(result.array());
 
+  const { title, priority } = req.body;
   const newTodo = {
     id: crypto.randomUUID(),
     title: title,
@@ -48,10 +49,10 @@ exports.read = (req, res) => {
 exports.update = (req, res) => {
   const { id, title, priority } = req.body;
 
-  if (!id || !title || title === "" || !priority) {
-    return res
-      .status(400)
-      .send({ type: "Error", message: "Missing title, priority or id" });
+  const result = validationResult(req);
+
+  if (!result.isEmpty()) {
+    return res.send({ errors: result.array() });
   }
 
   const updateTodo = todos.filter((todo) => todo.id === id)[0];
